@@ -7,11 +7,29 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <ComboBox HorizontalAlignment="Left" Margin="3,2,0,0" VerticalAlignment="Top" Width="208" Height="64"
-                  >
-            <Menu IsMainMenu="True"/>//change this cause it does not function
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="150" />
 
-        </ComboBox>
+
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="300,136,300,-100" Height="auto" Width="200">
+
+            <Button Content="Add New Recipe" Margin="5" Padding="10 5" Click="AddRecipeButton_Click" Height="auto" />
+
+            <Button Content="View Recipes" Margin="5" Padding="10 5" Click="ViewRecipesButton_Click" />
+
+            <Button Content="Search Recipes" Margin="5" Padding="10 5" Click="SearchRecipesButton_Click" />
+        </StackPanel>
+
+        <ToolBar HorizontalAlignment="Left" Height="38" Margin="10,0,0,6" VerticalAlignment="Bottom" Width="100">
+            <Button Click="Home" />
+            <Button Click="Clear Data" />
+            <Button Click="Exit" />
+        </ToolBar>
+        <TextBlock HorizontalAlignment="Center" Margin="0,68,0,0" Grid.Row="1" TextWrapping="Wrap" Text="WELCOME" VerticalAlignment="Top" Height="auto" Width="auto" FontSize="36" FontFamily="Tempus Sans ITC"/>
+
 
     </Grid>
 </Window>

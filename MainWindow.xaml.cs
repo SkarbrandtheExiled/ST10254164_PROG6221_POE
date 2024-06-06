@@ -24,5 +24,34 @@ namespace ST10254164_PROG6221_POE
         {
             InitializeComponent();
         }
+        private void ViewRecipesButton_Click(object sender, RoutedEventArgs e)
+        {
+            //MainContent.Content = new RecipeListView(); // Replace with your RecipeListView control
+        }
+
+        private void AddRecipeButton_Click(object sender, RoutedEventArgs e)
+        {
+            //MainContent.Content = new AddRecipeView(); // Replace with your AddRecipeView control
+        }
+
+        private void SearchRecipesButton_Click(object sender, RoutedEventArgs e)
+        {
+            //MainContent.Content = new SearchRecipesView(); // Replace with your SearchRecipesView control
+        }
+
+        private void Home(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Clear(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
