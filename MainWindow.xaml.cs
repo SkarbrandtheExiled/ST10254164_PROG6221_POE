@@ -39,17 +39,22 @@ namespace ST10254164_PROG6221_POE
             //MainContent.Content = new SearchRecipesView(); // Replace with your SearchRecipesView control
         }
 
-        private void Home(object sender, RoutedEventArgs e)
+        private void OptionsButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Clear(object sender, RoutedEventArgs e)
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Exit(object sender, RoutedEventArgs e)
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
