@@ -188,14 +188,23 @@ namespace ST10254164_PROG6221_POE.Classes
 
         public void DisplayAllRecipes()
         {
-            StringBuilder allRecipes = new StringBuilder("All Recipes:\n");
-
-            for (int i = 0; i < recipeNames.Count; i++)
+            if (recipeNames.Count == 0)
             {
-                allRecipes.AppendLine($"{i + 1}. {recipeNames[i]}\n");
+                MessageBox.Show("No recipes to display.", "All Recipes", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
             }
 
-            MessageBox.Show(allRecipes.ToString(), "All Recipes:\n", MessageBoxButton.OK, MessageBoxImage.Information);
+            // Sort the recipe names alphabetically
+            List<string> sortedRecipeNames = recipeNames.OrderBy(name => name).ToList();
+
+            StringBuilder allRecipes = new StringBuilder("All Recipes:\n");
+
+            for (int i = 0; i < sortedRecipeNames.Count; i++)
+            {
+                allRecipes.AppendLine($"{i + 1}. {sortedRecipeNames[i]}");
+            }
+
+            MessageBox.Show(allRecipes.ToString(), "All Recipes", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
             public void DisplayCalories(double totalCalories, double calorieLimit)
