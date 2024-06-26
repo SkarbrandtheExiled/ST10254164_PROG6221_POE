@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="viewAllRecipes" Height="450" Width="800">
     <Grid>
-        <ListBox x:Name="RecipeListBox" Margin="10" SelectionChanged="RecipeListBox_SelectionChanged"/>
+        <ListBox x:Name="RecipeListBox" Margin="10"/>
         <Button Content="Select" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Bottom" Width="75" Click="SelectButton_Click"/>
     </Grid>
 </Window>

@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 namespace ST10254164_PROG6221_POE
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// 
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -29,17 +29,15 @@ namespace ST10254164_PROG6221_POE
         }
         private void ViewRecipesButton_Click(object sender, RoutedEventArgs e)
         {
-            recipeData.DisplayRecipe();
-            //MainContent.Content = new RecipeListView(); // Replace with your RecipeListView control
+            recipeData.DisplayAllRecipes();
         }
 
         private void AddRecipeButton_Click(object sender, RoutedEventArgs e)
         {
             recipeData.Ingredients();
-            // Replace with your AddRecipeView control
         }
 
-        private void SearchRecipesButton_Click(object sender, RoutedEventArgs e)
+        private void SearchRecipesButton_Click(object sender, RoutedEventArgs e) 
         {
            recipeChoiceClass searchRecipe = new recipeChoiceClass();
             searchRecipe.RecipeChoice(recipeData);

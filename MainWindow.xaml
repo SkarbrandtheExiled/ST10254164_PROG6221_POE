@@ -14,7 +14,7 @@
 
             <Button Content="View Recipes" Margin="5" Padding="10 5" Click="ViewRecipesButton_Click" />
 
-            <Button Content="Search Recipes" Margin="5" Padding="10 5" Click="SearchRecipesButton_Click" />
+            <Button Content="Select Recipe" Margin="5" Padding="10 5" Click="SearchRecipesButton_Click" />
 
             <Button Content="Scale Recipe" Margin="5" Padding="10 5" Click="ScaleRecipeButton_Click" />
 

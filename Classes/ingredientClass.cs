@@ -7,6 +7,8 @@ using System.Windows;
 
 namespace ST10254164_PROG6221_POE.Classes
 {
+    public delegate void CalorieDisplayDelegate(double totalCalories, double calorieLimit);
+
     internal class ingredientClass
     {
         //-------creation and declaration of fields that will be used to store user data-------//
@@ -78,11 +80,13 @@ namespace ST10254164_PROG6221_POE.Classes
                         steps.Add(mainWindow.ShowInputDialog($"Please enter step {i + 1}:"));
                     }
                 }
-                DisplayRecipe();
+                DisplayRecipe(recipeNames.Last());
+
+                TotalCalories(DisplayCalories);
             }
         }
 
-        public void DisplayRecipe()
+        public void DisplayRecipe(string selectedRecipeName)
         {
             StringBuilder recipeDetails = new StringBuilder();
 
@@ -129,12 +133,19 @@ namespace ST10254164_PROG6221_POE.Classes
             string input = mainWindow.ShowInputDialog("Please enter a value to indicate how much the recipe must be scaled:");
             if (double.TryParse(input, out double scalingNum))
             {
-                for (int i = 0; i < ingredientQuantities.Length; i++)
+                if (ingredientQuantities != null && ingredientQuantities.Length > 0)
                 {
-                    ingredientQuantities[i] *= scalingNum;
+                    for (int i = 0; i < ingredientQuantities.Length; i++)
+                    {
+                        ingredientQuantities[i] *= scalingNum;
+                    }
+                    ScalingRecipe recipeScale = new ScalingRecipe(ingredientNames, ingredientQuantities, unitOfMeasurements, calorieCount, foodGroup, steps);
+                    recipeScale.DisplayScaling();
                 }
-                ScalingRecipe recipeScale = new ScalingRecipe(ingredientNames, ingredientQuantities, unitOfMeasurements, calorieCount, foodGroup, steps);
-                recipeScale.DisplayScaling();
+                else
+                {
+                    MessageBox.Show("There are no ingredients to scale, please check that there ARE recipes to scale");
+                }
             }
         }
 
@@ -148,7 +159,19 @@ namespace ST10254164_PROG6221_POE.Classes
             }
         }
 
-        public void DisplayCalories(double totalCalories, double calorieLimit)
+        public void DisplayAllRecipes()
+        {
+            StringBuilder allRecipes = new StringBuilder("All Recipes:\n");
+
+            for (int i = 0; i < recipeNames.Count; i++)
+            {
+                allRecipes.AppendLine($"{i + 1}. {recipeNames[i]}");
+            }
+
+            MessageBox.Show(allRecipes.ToString(), "All Recipes:\n", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+            public void DisplayCalories(double totalCalories, double calorieLimit)
         {
             if (totalCalories > calorieLimit)
             {
@@ -177,6 +200,7 @@ namespace ST10254164_PROG6221_POE.Classes
             double calorieLimit = 300;
             displayCalories(totalCalories, calorieLimit);
         }
+
     }
 }
 //*************************************END OF FILE***********************************************//

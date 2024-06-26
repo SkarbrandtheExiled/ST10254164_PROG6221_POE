@@ -19,10 +19,14 @@ namespace ST10254164_PROG6221_POE.Classes
     /// </summary>
     public partial class viewAllRecipes : Window
     {
-        public viewAllRecipes()
+        public List<string> RecipeNames { get; private set; }
+        public string SelectedRecipe { get; private set; }
+
+        public viewAllRecipes(List<string> recipeNames)
         {
             InitializeComponent();
-            RecipeListBox.ItemsSource = recipes;
+            RecipeNames = recipeNames;
+            RecipeListBox.ItemsSource = RecipeNames;
         }
 
         private void SelectButton_Click(object sender, RoutedEventArgs e)
@@ -30,16 +34,13 @@ namespace ST10254164_PROG6221_POE.Classes
             if (RecipeListBox.SelectedItem != null)
             {
                 SelectedRecipe = RecipeListBox.SelectedItem.ToString();
-                DialogResult = true;
+                DialogResult = true; // Close the dialog and return true
             }
             else
             {
-                MessageBox.Show("Please select a recipe", "choice required", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Please select a recipe.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-        private void RecipeListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            // Additional logic for selection change can be added here if needed
         }
     }
 }
+//*************************************END OF FILE***********************************************//

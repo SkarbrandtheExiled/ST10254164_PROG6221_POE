@@ -25,23 +25,11 @@ namespace ST10254164_PROG6221_POE.Classes
                 return;
             }
 
-            StringBuilder recipeMenu = new StringBuilder("Please choose which recipe you want to view:\n");
-            for (int i = 0; i < recipeData.recipeNames.Count; i++)
+            viewAllRecipes recipeListWindow = new viewAllRecipes(recipeData.recipeNames);
+            if (recipeListWindow.ShowDialog() == true)
             {
-                recipeMenu.AppendLine($"{i + 1}. {recipeData.recipeNames[i]}");
-            }
-
-            string input = mainWindow.ShowInputDialog(recipeMenu.ToString());
-            if (int.TryParse(input, out int recipeIndex) &&
-                recipeIndex >= 1 && recipeIndex <= recipeData.recipeNames.Count)
-            {
-                string selectedRecipeName = recipeData.recipeNames[recipeIndex - 1];
+                string selectedRecipeName = recipeListWindow.SelectedRecipe;
                 MessageBox.Show($"Selected Recipe: {selectedRecipeName}");
-                recipeData.DisplayRecipe();
-            }
-            else
-            {
-                MessageBox.Show("The recipe chosen does not exist. Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

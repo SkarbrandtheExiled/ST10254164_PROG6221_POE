@@ -17,6 +17,7 @@ namespace ST10254164_PROG6221_POE.Classes
             switch (result)
             {
                 case MessageBoxResult.Yes:
+recipeData.recipeNames.Clear();
                     recipeData.ingredientNames = null;
                     recipeData.ingredientQuantities = null;
                     recipeData.unitOfMeasurements = null;
@@ -24,7 +25,7 @@ namespace ST10254164_PROG6221_POE.Classes
                     MessageBox.Show("Data deleted!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     break;
                 case MessageBoxResult.No:
-                    recipeData.DisplayRecipe();
+                    recipeData.DisplayAllRecipes();
                     MessageBox.Show("Data still present", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     break;
                 default:
