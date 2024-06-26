@@ -16,11 +16,9 @@ using System.Windows.Shapes;
 
 namespace ST10254164_PROG6221_POE
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public partial class MainWindow : Window
     {
+//********************************************START OF FILE**********************************//
         private ingredientClass recipeData;
         public MainWindow()
         {
@@ -63,6 +61,7 @@ namespace ST10254164_PROG6221_POE
         {
 recipeData.ResetQuantities();
         }
+
      public string ShowInputDialog(string prompt)
         {
             addRecipeView dialog = new addRecipeView(prompt);
@@ -74,3 +73,4 @@ recipeData.ResetQuantities();
         }
     }
 }
+//*************************************END OF FILE***********************************************//

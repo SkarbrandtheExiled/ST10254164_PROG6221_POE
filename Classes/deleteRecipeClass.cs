@@ -7,6 +7,7 @@ using System.Windows;
 
 namespace ST10254164_PROG6221_POE.Classes
 {
+//********************************************START OF FILE**********************************//
     internal class deleteRecipeClass
     {
         //--------------------deleteData method---------------------------//
@@ -30,9 +31,10 @@ recipeData.recipeNames.Clear();
                     break;
                 default:
                     MessageBox.Show("Please enter a valid input", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
                     break;
             }
             }
         }
 }
-//--------------------------------END OF FILE--------------------------------//
+//*************************************END OF FILE***********************************************//

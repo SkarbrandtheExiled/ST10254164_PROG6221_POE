@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 
 namespace ST10254164_PROG6221_POE.Classes
 {
+//********************************************START OF FILE**********************************//
     public partial class addRecipeView : Window
     {
         public string ResponseText { get; private set; }
@@ -34,9 +35,6 @@ namespace ST10254164_PROG6221_POE.Classes
             DialogResult = true;
         }
 
-        private void ScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-
-        }
     }
 }
+//*************************************END OF FILE***********************************************//

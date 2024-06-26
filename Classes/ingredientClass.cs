@@ -9,6 +9,7 @@ using System.Windows.Media;
 
 namespace ST10254164_PROG6221_POE.Classes
 {
+//********************************************START OF FILE**********************************//
     public delegate void CalorieDisplayDelegate(double totalCalories, double calorieLimit);
 
     internal class ingredientClass

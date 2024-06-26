@@ -7,6 +7,7 @@ using System.Windows;
 
 namespace ST10254164_PROG6221_POE.Classes
 {
+//********************************************START OF FILE**********************************//
     internal class ScalingRecipe
     {
         private string[] ingredientNames;
@@ -25,6 +26,7 @@ namespace ST10254164_PROG6221_POE.Classes
             this.foodGroup = foodGroup;
             this.steps = steps;
         }
+
 
         public void DisplayScaling()
         {
@@ -49,4 +51,4 @@ namespace ST10254164_PROG6221_POE.Classes
         }
     }
 }
-//-----------------------------------END OF FILE-----------------------------//
+//*************************************END OF FILE***********************************************//
