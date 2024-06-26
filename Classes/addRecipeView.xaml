@@ -15,5 +15,9 @@
                 <Button Content="Cancel" Width="75" Margin="5" Click="CancelButton_Click"/>
             </StackPanel>
         </StackPanel>
+
+        <StackPanel RenderTransformOrigin="0.5,0.518" Margin="755,44,21,50">
+            <ScrollBar Height="340" Background="Aqua"/>
+        </StackPanel>
     </Grid>
 </Window>

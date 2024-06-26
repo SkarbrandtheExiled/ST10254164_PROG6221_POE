@@ -21,13 +21,15 @@
             <Button Content="Reset Recipe" Margin="5" Padding="10 5" Click="ResetRecipeButton_Click" />
         </StackPanel>
 
-        <ToolBar HorizontalAlignment="Left" Height="29" Margin="10,5,5,395" VerticalAlignment="Bottom" Width="100">
+        <StackPanel Orientation="Vertical" Margin="10, 10, 10, 10" >
+            <ToolBar HorizontalAlignment="Left" Height="29" Margin="10,5,5,395" VerticalAlignment="Bottom" Width="100">
             <TextBlock Text="Options" Margin="0 2"/>
             <Button Content="Clear Data" Click="ClearButton_Click"/>
             <Button Content="Exit" Click="ExitButton_Click"/>
         </ToolBar>
-
-        <TextBlock HorizontalAlignment="Center" Margin="0,68,0,0" Grid.Row="1" TextWrapping="Wrap" Text="WELCOME" VerticalAlignment="Top" Height="auto" Width="auto" FontSize="36" FontFamily="Tempus Sans ITC"/>
+        </StackPanel>
+        
+    <TextBlock HorizontalAlignment="Center" Margin="0,68,0,0" Grid.Row="1" TextWrapping="Wrap" Text="WELCOME" VerticalAlignment="Top" Height="auto" Width="auto" FontSize="36" FontFamily="Tempus Sans ITC"/>
 
     </Grid>
 </Window>

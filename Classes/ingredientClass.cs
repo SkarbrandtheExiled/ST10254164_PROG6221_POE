@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace ST10254164_PROG6221_POE.Classes
 {
@@ -19,6 +21,8 @@ namespace ST10254164_PROG6221_POE.Classes
         public List<string> recipeNames = new List<string>();
         public double[] calorieCount;
         public string[] foodGroup;
+
+        private double[] originalQuantities;
 
         private MainWindow mainWindow;
 
@@ -38,6 +42,7 @@ namespace ST10254164_PROG6221_POE.Classes
             {
                 ingredientNames = new string[numIngredients];
                 ingredientQuantities = new double[numIngredients];
+                originalQuantities = new double[numIngredients];
                 unitOfMeasurements = new string[numIngredients];
                 calorieCount = new double[numIngredients];
                 foodGroup = new string[numIngredients];
@@ -52,13 +57,19 @@ namespace ST10254164_PROG6221_POE.Classes
                         {
                             input = mainWindow.ShowInputDialog($"Please enter the quantity of {ingredientNames[i]}:");
                             if (double.TryParse(input, out ingredientQuantities[i]))
-                                break;
+                            { 
+                                originalQuantities[i] = ingredientQuantities[i];
+                            break;
+                        }
                             MessageBox.Show("Please enter a valid number for the quantity.");
                         }
 
                         unitOfMeasurements[i] = mainWindow.ShowInputDialog($"Please enter the unit of measurement for {ingredientNames[i]}:");
 
-                        input = mainWindow.ShowInputDialog($"Please enter the number of calories for {ingredientNames[i]}:");
+                        input = mainWindow.ShowInputDialog($"Please enter the number of calories for {ingredientNames[i]}:\n\n" +
+                            "Please note:\n <300: a breakfast could be two eggs, 1 slice of multigrain bread, and 1 large apple which comes out to about 282 calories. Low-calorie breakfast foods include eggs, egg whites, fruit and yogurt, high protein waffles, vegetable frittatas, oatmeal, and toast.\n" +
+                            "=300: calories is considered a light snack\n" +
+                            ">300: more than 300 calories according to this POE is considered too much. Some examples of calorie-dense foods include full-fat dairy products, fatty beef, oils, nuts, and seeds.");
                         double.TryParse(input, out calorieCount[i]);
 
                         foodGroup[i] = mainWindow.ShowInputDialog($"Please enter the food group for {ingredientNames[i]}:");
@@ -149,6 +160,22 @@ namespace ST10254164_PROG6221_POE.Classes
             }
         }
 
+        public void ResetQuantities()
+        {
+            if (originalQuantities != null && ingredientQuantities != null && originalQuantities.Length == ingredientQuantities.Length)
+            {
+                for (int i = 0; i < originalQuantities.Length; i++)
+                {
+                    ingredientQuantities[i] = originalQuantities[i];
+                }
+                MessageBox.Show("Ingredient quantities have been reset to their original values", "Reset Quantities", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("No ingredient quantities to reset", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         public void AddRecipe()
         {
             string recipeName = mainWindow.ShowInputDialog("Please enter the name of the recipe:");
@@ -165,7 +192,7 @@ namespace ST10254164_PROG6221_POE.Classes
 
             for (int i = 0; i < recipeNames.Count; i++)
             {
-                allRecipes.AppendLine($"{i + 1}. {recipeNames[i]}");
+                allRecipes.AppendLine($"{i + 1}. {recipeNames[i]}\n");
             }
 
             MessageBox.Show(allRecipes.ToString(), "All Recipes:\n", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -186,14 +213,14 @@ namespace ST10254164_PROG6221_POE.Classes
         public delegate void CalorieDisplayDelegate(double totalCalories, double calorieLimit);
         public static void DisplayExceededCalories(double totalCalories, double calorieLimit)
         {
-            MessageBox.Show($"Number of calories ({totalCalories}) has exceeded the maximum limit of {calorieLimit} calories.");
+            MessageBox.Show("A calorie is a unit of energy that measures how much energy food provides to the body. The body needs calories to work as it should. Dietary fats are nutrients in food that the body uses to build cell membranes, nerve tissue (like the brain), and hormones. Fat in our diet is a source of calories.\n" + "Fatty foods, such as fried foods, fatty meats, oils, butter, sugary treats, and candies are high - calorie foods.While many high - calorie foods are low in nutrients, vitamins, and minerals, there are also plenty of high - calorie foods that are surprisingly healthy.\n\n" +
+                $"Number of calories ({totalCalories}) has exceeded the maximum limit of {calorieLimit} calories.");
         }
 
         public static void DisplayTotalCalories(double totalCalories, double calorieLimit)
         {
             MessageBox.Show($"Total calories: {totalCalories}");
         }
-
         public void TotalCalories(CalorieDisplayDelegate displayCalories)
         {
             double totalCalories = calorieCount.Sum();

@@ -33,5 +33,10 @@ namespace ST10254164_PROG6221_POE.Classes
             ResponseText = InputTextBox.Text;
             DialogResult = true;
         }
+
+        private void ScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
     }
 }

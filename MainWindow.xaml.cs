@@ -61,7 +61,7 @@ namespace ST10254164_PROG6221_POE
 
         private void ResetRecipeButton_Click(object sender, RoutedEventArgs e)
         {
-
+recipeData.ResetQuantities();
         }
      public string ShowInputDialog(string prompt)
         {

@@ -29,7 +29,8 @@ namespace ST10254164_PROG6221_POE.Classes
             if (recipeListWindow.ShowDialog() == true)
             {
                 string selectedRecipeName = recipeListWindow.SelectedRecipe;
-                MessageBox.Show($"Selected Recipe: {selectedRecipeName}");
+                MessageBox.Show($"Selected Recipe: {selectedRecipeName}\n");
+                recipeData.DisplayRecipe(selectedRecipeName);
             }
         }
     }
