@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ST10254164_PROG6221_POE.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,43 +21,58 @@ namespace ST10254164_PROG6221_POE
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ingredientClass recipeData;
         public MainWindow()
         {
             InitializeComponent();
+            recipeData = new ingredientClass();
         }
         private void ViewRecipesButton_Click(object sender, RoutedEventArgs e)
         {
+            recipeData.DisplayRecipe();
             //MainContent.Content = new RecipeListView(); // Replace with your RecipeListView control
         }
 
         private void AddRecipeButton_Click(object sender, RoutedEventArgs e)
         {
-            //MainContent.Content = new AddRecipeView(); // Replace with your AddRecipeView control
+            recipeData.Ingredients();
+            // Replace with your AddRecipeView control
         }
 
         private void SearchRecipesButton_Click(object sender, RoutedEventArgs e)
         {
-            //MainContent.Content = new SearchRecipesView(); // Replace with your SearchRecipesView control
-        }
-
-        private void OptionsButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void HomeButton_Click(object sender, RoutedEventArgs e)
-        {
-
+           recipeChoiceClass searchRecipe = new recipeChoiceClass();
+            searchRecipe.RecipeChoice(recipeData);
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-
+                    deleteRecipeClass deleteRecipe = new deleteRecipeClass();
+            deleteRecipe.DeleteData(recipeData);
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+        Application.Current.Shutdown();
+    }
+
+        private void ScaleRecipeButton_Click(object sender, RoutedEventArgs e)
+        {
+        recipeData.QuantityScaling();
+    }
+
+        private void ResetRecipeButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+     public string ShowInputDialog(string prompt)
+        {
+            addRecipeView dialog = new addRecipeView(prompt);
+            if (dialog.ShowDialog() == true)
+            {
+                return dialog.ResponseText;
+            }
+            return null;
         }
     }
 }
