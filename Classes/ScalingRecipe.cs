@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ST10254164_PROG6221_POE.Classes
 {
-//********************************************START OF FILE**********************************//
+    //********************************************START OF FILE**********************************//
     internal class ScalingRecipe
     {
         private string[] ingredientNames;

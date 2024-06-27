@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace ST10254164_PROG6221_POE.Classes
 {
@@ -16,10 +12,18 @@ namespace ST10254164_PROG6221_POE.Classes
     /// References:
     /// Microsoft Learn, 2023. How to: Filter Data in a View. [Online] Available at: https://learn.microsoft.com/en-us/dotnet/desktop/wpf/data/how-to-filter-data-in-a-view?view=netframeworkdesktop-4.8 [Accessed 26 June 2024].
     /// STACK OVERFLOW, 2011. How to Add a Scrollbar to Window in C#. [Online] Available at: https://stackoverflow.com/questions/6068860/how-to-add-a-scrollbar-to-window-in-c-sharp [Accessed 25 June 2024].
-    /// 
-/// </summary>
+    /// Microsoft Learn, 2022. XAML code editor. [Online] Available at: https://learn.microsoft.com/en-us/visualstudio/xaml-tools/xaml-code-editor?view=vs-2022 [Accessed 20 June 2024].
+    /// https://www.codeproject.com/Questions/1180559/How-do-I-add-at-an-array-with-user-input
+    ///https://www.youtube.com/watch?v=1ZO-McTuxtw
+    /// GeeksforGeeks, 2022. C# | List Class. [Online] Available at: https://www.geeksforgeeks.org/c-sharp-list-class/[Accessed 12 April 2024].
+    /// GeeksforGeeks, 2023. C# Decision Making (if, if-else, if-else-if ladder, nested if, switch, nested switch). [Online] Available at: https://www.geeksforgeeks.org/c-sharp-decision-making-else-else-ladder-nested-switch-nested-switch/?ref=shm[Accessed 10 April 2024].
+    /// Troelsen, A. & Japikse, P., 2022. Pro C# 10 with. NET 6: Foundational Principles and Practices in Programming.. 11 ed. s.l.:Apress.
+    /// Youtube, 2020. WPF Tutorials. [Online] Availaible at: https://www.youtube.com/playlist?list=PLJJcOjd3n1Zegr2CaA78RWF9IIgeyq0xh [Accessed 21 June 2024].
+    /// Youtube, 2021. Filtering, Sorting, and Grouping w/ Collection Views - EASY WPF (.NET CORE). [Online] Available at: https://www.youtube.com/watch?v=fBKW-spQboc&ab_channel=SingletonSean [Accessed 26 June 2024].
+    /// Youtube, 2017. Intro to WPF: Learn the basics and best practices of WPF for C# [Online] Available at: https://www.youtube.com/watch?v=gSfMNjWNoX0&ab_channel=IAmTimCorey [Accessed 12 June 2024].
+    /// </summary>
 
-//********************************************START OF FILE**********************************//
+    //********************************************START OF FILE**********************************//
     public delegate void CalorieDisplayDelegate(double totalCalories, double calorieLimit);
 
     public class ingredientClass
