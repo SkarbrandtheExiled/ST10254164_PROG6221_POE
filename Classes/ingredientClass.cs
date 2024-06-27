@@ -26,18 +26,19 @@ namespace ST10254164_PROG6221_POE.Classes
     //********************************************START OF FILE**********************************//
     public delegate void CalorieDisplayDelegate(double totalCalories, double calorieLimit);
 
+    // Constructor initializes the main window reference
     public class ingredientClass
     {
         //-------creation and declaration of fields that will be used to store user data-------//
-        public string[] ingredientNames;
-        public double[] ingredientQuantities;
-        public string[] unitOfMeasurements;
-        public List<string> steps;
-        public List<string> recipeNames = new List<string>();
-        public double[] calorieCount;
-        public string[] foodGroup;
+        public string[] ingredientNames; // Names of ingredients
+        public double[] ingredientQuantities; // Quantities of ingredients
+        public string[] unitOfMeasurements; // Units of measurement for ingredients
+        public List<string> steps; // List of cooking steps
+        public List<string> recipeNames = new List<string>(); // List of recipe names
+        public double[] calorieCount; // Calorie count per ingredient
+        public string[] foodGroup; // Food group for each ingredient
 
-        private double[] originalQuantities;
+        private double[] originalQuantities; // Original quantities of ingredients
 
         private MainWindow mainWindow;
 
@@ -48,6 +49,7 @@ namespace ST10254164_PROG6221_POE.Classes
 
         //---------------------------Ingrediants method----------------------------//
         //this method is responsible for handling all data relevant to the ingredients of the recipe
+        // Also handles user input for recipe ingredients
         public void Ingredients()
         {
             AddRecipe();
@@ -55,6 +57,8 @@ namespace ST10254164_PROG6221_POE.Classes
             string input = mainWindow.ShowInputDialog("Please enter the number of ingredients in the recipe:");
             if (int.TryParse(input, out int numIngredients))
             {
+
+                // Initialize arrays based on number of ingredients
                 ingredientNames = new string[numIngredients];
                 ingredientQuantities = new double[numIngredients];
                 originalQuantities = new double[numIngredients];
@@ -62,6 +66,8 @@ namespace ST10254164_PROG6221_POE.Classes
                 calorieCount = new double[numIngredients];
                 foodGroup = new string[numIngredients];
 
+
+                // Loop to gather ingredient details
                 for (int i = 0; i < numIngredients; i++)
                 {
                     ingredientNames[i] = mainWindow.ShowInputDialog($"Please enter the name of ingredient {i + 1}:");
@@ -111,7 +117,8 @@ namespace ST10254164_PROG6221_POE.Classes
                 TotalCalories(DisplayCalories);
             }
         }
-
+        //----------------display recipe method---------------------//
+        //responsible for the displaying of the recipe with all the information that the user inputted
         public void DisplayRecipe(string selectedRecipeName)
         {
             StringBuilder recipeDetails = new StringBuilder();
@@ -154,6 +161,8 @@ namespace ST10254164_PROG6221_POE.Classes
             MessageBox.Show(recipeDetails.ToString(), "Recipe information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
+        //---------------QuantityScaling method----------------------//
+        //responsible for performing the calculations when scaling the recipe in the even the user wants to crete more than one
         public void QuantityScaling()
         {
             string input = mainWindow.ShowInputDialog("Please enter a value to indicate how much the recipe must be scaled:");
@@ -175,6 +184,8 @@ namespace ST10254164_PROG6221_POE.Classes
             }
         }
 
+        //---------------resetQuantities method----------------------//
+        //resposible for resseting the values of the ingredients if the user wants to reset the data back to the original
         public void ResetQuantities()
         {
             if (originalQuantities != null && ingredientQuantities != null && originalQuantities.Length == ingredientQuantities.Length)
@@ -191,6 +202,8 @@ namespace ST10254164_PROG6221_POE.Classes
             }
         }
 
+        //-------------addRecipe method-------------------//
+        //responsible for adding the name of a recipe essentialy assigning a recipe a name that can be used with the filter
         public void AddRecipe()
         {
             string recipeName = mainWindow.ShowInputDialog("Please enter the name of the recipe:");
@@ -201,6 +214,8 @@ namespace ST10254164_PROG6221_POE.Classes
             }
         }
 
+        //----------------DisplayAllRecipes method----------------//
+        //responsible for displaying the recipe names as well as the information associated with each recipe name
         public void DisplayAllRecipes()
         {
             if (recipeNames.Count == 0)
@@ -224,7 +239,8 @@ namespace ST10254164_PROG6221_POE.Classes
                 DisplayRecipe(recipeName);
             }
         }
-
+        //-------------------displayCalories method---------------------//
+        //responsible for determining which delegate method must be displayed depending on the total number of calories calculated at the end
             public void DisplayCalories(double totalCalories, double calorieLimit)
         {
             if (totalCalories > calorieLimit)
@@ -237,7 +253,8 @@ namespace ST10254164_PROG6221_POE.Classes
             }
         }
 
-        public delegate void CalorieDisplayDelegate(double totalCalories, double calorieLimit);
+        //----------------delegate methods------------------//
+        //put simply a delegate is a reference to another object and a delegate method is a method of the delegate. A delegate method implements the callback mechanism which usually takes the sender as one of the parameter to be called
         public static void DisplayExceededCalories(double totalCalories, double calorieLimit)
         {
             MessageBox.Show("A calorie is a unit of energy that measures how much energy food provides to the body. The body needs calories to work as it should. Dietary fats are nutrients in food that the body uses to build cell membranes, nerve tissue (like the brain), and hormones. Fat in our diet is a source of calories.\n" + "Fatty foods, such as fried foods, fatty meats, oils, butter, sugary treats, and candies are high - calorie foods.While many high - calorie foods are low in nutrients, vitamins, and minerals, there are also plenty of high - calorie foods that are surprisingly healthy.\n\n" +
