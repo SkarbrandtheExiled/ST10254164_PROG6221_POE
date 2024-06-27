@@ -9,6 +9,16 @@ using System.Windows.Media;
 
 namespace ST10254164_PROG6221_POE.Classes
 {
+    /// <summary>
+    /// Name: Luke Michael Carolus
+    /// StudentID: ST10254164
+    /// Module: PROG6221
+    /// References:
+    /// Microsoft Learn, 2023. How to: Filter Data in a View. [Online] Available at: https://learn.microsoft.com/en-us/dotnet/desktop/wpf/data/how-to-filter-data-in-a-view?view=netframeworkdesktop-4.8 [Accessed 26 June 2024].
+    /// 
+/// </summary>
+/// 
+
 //********************************************START OF FILE**********************************//
     public delegate void CalorieDisplayDelegate(double totalCalories, double calorieLimit);
 

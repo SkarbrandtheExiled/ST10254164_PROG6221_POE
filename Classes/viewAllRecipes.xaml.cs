@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,18 +15,38 @@ using System.Windows.Shapes;
 
 namespace ST10254164_PROG6221_POE.Classes
 {
+/// <summary>
+/// Name: Luke Michael Carolus
+/// StudentID: ST10254164
+/// Module: PROG6221
+/// </summary>
+/// 
     public partial class viewAllRecipes : Window
     {
         private ingredientClass ingredients;
+        private ICollectionView recipeCollectionView;
 
-        public viewAllRecipes()
+        public string SelectedRecipe { get; private set; }
+
+        public viewAllRecipes(List<string> recipeNames)
         {
             InitializeComponent();
             ingredients = new ingredientClass();
             DisplayAllRecipes();
+            InitializeRecipeList();
         }
 
-        private void DisplayAllRecipes()
+        public void InitializeRecipeList()
+        {
+            // Wrap the recipeNames list in a CollectionView
+            recipeCollectionView = CollectionViewSource.GetDefaultView(ingredients.recipeNames);
+            // Set the CollectionView as the ItemsSource of the ListBox
+            RecipeListBox.ItemsSource = recipeCollectionView;
+            // Sort recipes alphabetically by default
+            recipeCollectionView.SortDescriptions.Add(new SortDescription(string.Empty, ListSortDirection.Ascending));
+        }
+
+        public void DisplayAllRecipes()
         {
             RecipeListBox.Items.Clear();
             var sortedRecipeNames = ingredients.recipeNames.OrderBy(name => name).ToList();
@@ -35,35 +56,44 @@ namespace ST10254164_PROG6221_POE.Classes
             }
         }
 
-        private void FilterByNameButton_Click(object sender, RoutedEventArgs e)
+        public void FilterByNameButton_Click(object sender, RoutedEventArgs e)
         {
-            var filterName = NameFilterTextBox.Text;
-            var filteredRecipes = ingredients.recipeNames
-                .Where(name => name.Contains(filterName, StringComparison.OrdinalIgnoreCase))
-                .OrderBy(name => name)
-                .ToList();
-
-            UpdateRecipeListBox(filteredRecipes);
-        }
-
-        private void FilterByCaloriesButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (double.TryParse(CaloriesFilterTextBox.Text, out double maxCalories))
+            string filterName = NameFilterTextBox.Text;
+            if (string.IsNullOrWhiteSpace(filterName))
             {
-                var filteredRecipes = ingredients.recipeNames
-                    .Where((name, index) => ingredients.calorieCount[index] <= maxCalories)
-                    .OrderBy(name => name)
-                    .ToList();
-
-                UpdateRecipeListBox(filteredRecipes);
+                // If the filter text is empty, remove the filter
+                recipeCollectionView.Filter = null;
             }
             else
             {
-                MessageBox.Show("Please enter a valid number for the calories filter.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
+                // Apply the filter to the CollectionView
+                recipeCollectionView.Filter = item =>
+                {
+                    var recipeName = item as string;
+                    return !(recipeName == null || !recipeName.Contains(filterName));
+                };
+            }
+            recipeCollectionView.Refresh();
+        }
+
+        public void FilterByCaloriesButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (double.TryParse(CaloriesFilterTextBox.Text, out double maxCalories))
+            {
+                recipeCollectionView.Filter = item =>
+                {
+                    int index = ingredients.recipeNames.IndexOf(item as string);
+                    return index >= 0 && ingredients.calorieCount[index] <= maxCalories;
+                };
+                recipeCollectionView.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Please enter a valid number for the calories filter", "invalid input", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
-        private void UpdateRecipeListBox(List<string> filteredRecipes)
+        public void UpdateRecipeListBox(List<string> filteredRecipes)
         {
             RecipeListBox.Items.Clear();
             foreach (var recipe in filteredRecipes)
@@ -72,16 +102,17 @@ namespace ST10254164_PROG6221_POE.Classes
             }
         }
 
-        private void SelectButton_Click(object sender, RoutedEventArgs e)
+        public void SelectButton_Click(object sender, RoutedEventArgs e)
         {
-            if (RecipeListBox.SelectedItem != null)
+            SelectedRecipe = RecipeListBox.SelectedItem as string;
+            if (SelectedRecipe != null)
             {
-                string selectedRecipeName = RecipeListBox.SelectedItem.ToString();
-                ingredients.DisplayRecipe(selectedRecipeName);
+                DialogResult = true;
+                Close();
             }
             else
             {
-                MessageBox.Show("Please select a recipe from the list.", "No Selection", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Please select a recipe.", "Selection Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
     }
