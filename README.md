@@ -20,6 +20,5 @@ Changes Made:
 -------------------------------------------------
 Screenshots of commits:
 ![Screenshot 2024-06-27 185219](https://github.com/SkarbrandtheExiled/ST10254164_PROG6221_POE/assets/131450052/b9e94d3f-6094-46fa-a715-abd6e408a9cd)
-![Screenshot 2024-06-27 185219](https://github.com/SkarbrandtheExiled/ST10254164_PROG6221_POE/assets/131450052/b9e94d3f-6094-46fa-a715-abd6e408a9cd)
-
+![Screenshot 2024-06-27 185223](https://github.com/SkarbrandtheExiled/ST10254164_PROG6221_POE/assets/131450052/c49a7369-db9f-461a-b6a7-e334cc874224)
 -------------------------------------------------
