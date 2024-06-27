@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="460" Width="800">
     <Grid Name="MainView">
-
+<!---stackPanel for the main recipe buttons-->
         <StackPanel Orientation="Vertical" Margin="300,136,300,-100" Height="auto" Width="auto">
 
             <Button Content="Add New Recipe" Margin="5" Padding="10 5" Click="AddRecipeButton_Click" Height="auto" />
@@ -21,6 +21,7 @@
             <Button Content="Reset Recipe" Margin="5" Padding="10 5" Click="ResetRecipeButton_Click" />
         </StackPanel>
 
+        <!---StackPanel for the less important features that can be used-->
         <StackPanel Orientation="Vertical" Margin="10, 10, 10, 10" >
             <ToolBar HorizontalAlignment="Left" Height="29" Margin="10,5,5,395" VerticalAlignment="Bottom" Width="100">
             <TextBlock Text="Options" Margin="0 2"/>
@@ -29,6 +30,7 @@
         </ToolBar>
         </StackPanel>
         
+        <!---TextBlock for the welcome message-->
     <TextBlock HorizontalAlignment="Center" Margin="0,68,0,0" Grid.Row="1" TextWrapping="Wrap" Text="WELCOME" VerticalAlignment="Top" Height="auto" Width="auto" FontSize="36" FontFamily="Tempus Sans ITC"/>
 
     </Grid>

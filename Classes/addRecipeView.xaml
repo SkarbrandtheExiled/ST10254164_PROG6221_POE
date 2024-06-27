@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="addRecipeView" Height="460" Width="800">
     <Grid>
+        <!--StackPanel for input box as well as confirmation and cancellation button-->
         <StackPanel Margin="30">
             <TextBlock x:Name="PromptText" Text="prompt" Margin="0,0,0,30" FontSize="16"/>
             <TextBox x:Name="InputTextBox" Margin="0,0,0,10"/>

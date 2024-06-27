@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Media.Animation;
 
 namespace ST10254164_PROG6221_POE.Classes
 {
@@ -15,30 +17,31 @@ namespace ST10254164_PROG6221_POE.Classes
     /// Microsoft Learn, 2022. XAML code editor. [Online] Available at: https://learn.microsoft.com/en-us/visualstudio/xaml-tools/xaml-code-editor?view=vs-2022 [Accessed 20 June 2024].
     /// https://www.codeproject.com/Questions/1180559/How-do-I-add-at-an-array-with-user-input
     ///https://www.youtube.com/watch?v=1ZO-McTuxtw
-    /// GeeksforGeeks, 2022. C# | List Class. [Online] Available at: https://www.geeksforgeeks.org/c-sharp-list-class/[Accessed 12 April 2024].
+    /// GeeksforGeeks, 2022. C# | List Class. [Online] Available at: https://www.geeksforgeeks.org/c-sharp-list-class/ [Accessed 12 April 2024].
     /// GeeksforGeeks, 2023. C# Decision Making (if, if-else, if-else-if ladder, nested if, switch, nested switch). [Online] Available at: https://www.geeksforgeeks.org/c-sharp-decision-making-else-else-ladder-nested-switch-nested-switch/?ref=shm[Accessed 10 April 2024].
     /// Troelsen, A. & Japikse, P., 2022. Pro C# 10 with. NET 6: Foundational Principles and Practices in Programming.. 11 ed. s.l.:Apress.
     /// Youtube, 2020. WPF Tutorials. [Online] Availaible at: https://www.youtube.com/playlist?list=PLJJcOjd3n1Zegr2CaA78RWF9IIgeyq0xh [Accessed 21 June 2024].
     /// Youtube, 2021. Filtering, Sorting, and Grouping w/ Collection Views - EASY WPF (.NET CORE). [Online] Available at: https://www.youtube.com/watch?v=fBKW-spQboc&ab_channel=SingletonSean [Accessed 26 June 2024].
     /// Youtube, 2017. Intro to WPF: Learn the basics and best practices of WPF for C# [Online] Available at: https://www.youtube.com/watch?v=gSfMNjWNoX0&ab_channel=IAmTimCorey [Accessed 12 June 2024].
+    /// Microsoft Learn, 2022. Delegates (C# Programming Guide). [Online] Available at: https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/delegates/ [Accessed 26 June 2024].
     /// </summary>
 
     //********************************************START OF FILE**********************************//
     public delegate void CalorieDisplayDelegate(double totalCalories, double calorieLimit);
 
-    // Constructor initializes the main window reference
+    //constructor initializes the main window reference
     public class ingredientClass
     {
         //-------creation and declaration of fields that will be used to store user data-------//
-        public string[] ingredientNames; // Names of ingredients
-        public double[] ingredientQuantities; // Quantities of ingredients
-        public string[] unitOfMeasurements; // Units of measurement for ingredients
-        public List<string> steps; // List of cooking steps
-        public List<string> recipeNames = new List<string>(); // List of recipe names
-        public double[] calorieCount; // Calorie count per ingredient
-        public string[] foodGroup; // Food group for each ingredient
+        public string[] ingredientNames; //names of ingredients
+        public double[] ingredientQuantities; //quantities of ingredients
+        public string[] unitOfMeasurements; //units of measurement for ingredients
+        public List<string> steps; //list of cooking steps
+        public List<string> recipeNames = new List<string>(); //list of recipe names
+        public double[] calorieCount; //calorie count per ingredient
+        public string[] foodGroup; //food group for each ingredient
 
-        private double[] originalQuantities; // Original quantities of ingredients
+        private double[] originalQuantities; // original quantities of ingredients
 
         private MainWindow mainWindow;
 
@@ -49,7 +52,7 @@ namespace ST10254164_PROG6221_POE.Classes
 
         //---------------------------Ingrediants method----------------------------//
         //this method is responsible for handling all data relevant to the ingredients of the recipe
-        // Also handles user input for recipe ingredients
+        //also handles user input for recipe ingredients
         public void Ingredients()
         {
             AddRecipe();
@@ -58,7 +61,7 @@ namespace ST10254164_PROG6221_POE.Classes
             if (int.TryParse(input, out int numIngredients))
             {
 
-                // Initialize arrays based on number of ingredients
+                //initialise arrays based on number of ingredients
                 ingredientNames = new string[numIngredients];
                 ingredientQuantities = new double[numIngredients];
                 originalQuantities = new double[numIngredients];
@@ -67,13 +70,14 @@ namespace ST10254164_PROG6221_POE.Classes
                 foodGroup = new string[numIngredients];
 
 
-                // Loop to gather ingredient details
+                //loop to gather ingredient details
                 for (int i = 0; i < numIngredients; i++)
                 {
                     ingredientNames[i] = mainWindow.ShowInputDialog($"Please enter the name of ingredient {i + 1}:");
 
                     if (!string.IsNullOrWhiteSpace(ingredientNames[i]))
                     {
+                        //input validation for quantity
                         while (true)
                         {
                             input = mainWindow.ShowInputDialog($"Please enter the quantity of {ingredientNames[i]}:");
@@ -87,6 +91,7 @@ namespace ST10254164_PROG6221_POE.Classes
 
                         unitOfMeasurements[i] = mainWindow.ShowInputDialog($"Please enter the unit of measurement for {ingredientNames[i]}:");
 
+                        //an input window asking for the number of calories along with a small notice that explains the meaning of certain values of calories
                         input = mainWindow.ShowInputDialog($"Please enter the number of calories for {ingredientNames[i]}:\n\n" +
                             "Please note:\n <300: a breakfast could be two eggs, 1 slice of multigrain bread, and 1 large apple which comes out to about 282 calories. Low-calorie breakfast foods include eggs, egg whites, fruit and yogurt, high protein waffles, vegetable frittatas, oatmeal, and toast.\n" +
                             "=300: calories is considered a light snack\n" +
@@ -101,19 +106,21 @@ namespace ST10254164_PROG6221_POE.Classes
                         i--;
                     }
                 }
-
+                //input for number of cooking steps
                 input = mainWindow.ShowInputDialog("Please enter the number of steps:");
                 if (int.TryParse(input, out int numSteps))
                 {
                     steps = new List<string>(numSteps);
-
+                    //loop to gather cooking steps
                     for (int i = 0; i < numSteps; i++)
                     {
                         steps.Add(mainWindow.ShowInputDialog($"Please enter step {i + 1}:"));
                     }
                 }
+                //display the last added recipe
                 DisplayRecipe(recipeNames.Last());
 
+                //calculate and display total calories
                 TotalCalories(DisplayCalories);
             }
         }
@@ -126,6 +133,7 @@ namespace ST10254164_PROG6221_POE.Classes
             recipeDetails.AppendLine("Full recipe:");
             recipeDetails.AppendLine("----------------------------");
 
+            //check if ingredients are initialised and display them
             if (ingredientNames == null || ingredientQuantities == null || unitOfMeasurements == null || calorieCount == null || foodGroup == null)
             {
                 recipeDetails.AppendLine("No ingredients added.");
@@ -142,6 +150,7 @@ namespace ST10254164_PROG6221_POE.Classes
                 }
             }
 
+            //display cooking steps
             recipeDetails.AppendLine("------------------------");
             recipeDetails.AppendLine("Steps:");
 
@@ -158,6 +167,7 @@ namespace ST10254164_PROG6221_POE.Classes
             }
             recipeDetails.AppendLine("---------------------------");
 
+            //show recipe details in a message box
             MessageBox.Show(recipeDetails.ToString(), "Recipe information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
@@ -168,6 +178,7 @@ namespace ST10254164_PROG6221_POE.Classes
             string input = mainWindow.ShowInputDialog("Please enter a value to indicate how much the recipe must be scaled:");
             if (double.TryParse(input, out double scalingNum))
             {
+                //scale quantities if ingredients are initialised
                 if (ingredientQuantities != null && ingredientQuantities.Length > 0)
                 {
                     for (int i = 0; i < ingredientQuantities.Length; i++)
@@ -179,6 +190,7 @@ namespace ST10254164_PROG6221_POE.Classes
                 }
                 else
                 {
+                    //message box in the event that there is nothing to scale
                     MessageBox.Show("There are no ingredients to scale, please check that there ARE recipes to scale");
                 }
             }
@@ -188,6 +200,7 @@ namespace ST10254164_PROG6221_POE.Classes
         //resposible for resseting the values of the ingredients if the user wants to reset the data back to the original
         public void ResetQuantities()
         {
+            //check if original quantities are available and resets them
             if (originalQuantities != null && ingredientQuantities != null && originalQuantities.Length == ingredientQuantities.Length)
             {
                 for (int i = 0; i < originalQuantities.Length; i++)
@@ -229,11 +242,13 @@ namespace ST10254164_PROG6221_POE.Classes
 
             StringBuilder allRecipes = new StringBuilder("All Recipes:\n");
 
+            //append sorted recipe names to the string builder
             for (int i = 0; i < sortedRecipeNames.Count; i++)
             {
                 allRecipes.AppendLine($"{i + 1}. {sortedRecipeNames[i]}");
             }
             MessageBox.Show(allRecipes.ToString(), "All Recipes", MessageBoxButton.OK, MessageBoxImage.Information);
+            // a foreach loop that displays the recipe details for each recipe
             foreach (var recipeName in recipeNames)
             {
                 DisplayRecipe(recipeName);
@@ -255,16 +270,20 @@ namespace ST10254164_PROG6221_POE.Classes
 
         //----------------delegate methods------------------//
         //put simply a delegate is a reference to another object and a delegate method is a method of the delegate. A delegate method implements the callback mechanism which usually takes the sender as one of the parameter to be called
+        //display method for when total calories exceed the limit
         public static void DisplayExceededCalories(double totalCalories, double calorieLimit)
         {
+            //a small message that gets displayed only if the user exceeds the maximum limit of calories along with their total number of calories
             MessageBox.Show("A calorie is a unit of energy that measures how much energy food provides to the body. The body needs calories to work as it should. Dietary fats are nutrients in food that the body uses to build cell membranes, nerve tissue (like the brain), and hormones. Fat in our diet is a source of calories.\n" + "Fatty foods, such as fried foods, fatty meats, oils, butter, sugary treats, and candies are high - calorie foods.While many high - calorie foods are low in nutrients, vitamins, and minerals, there are also plenty of high - calorie foods that are surprisingly healthy.\n\n" +
                 $"Number of calories ({totalCalories}) has exceeded the maximum limit of {calorieLimit} calories.");
         }
 
+        //display method for total calories within limit
         public static void DisplayTotalCalories(double totalCalories, double calorieLimit)
         {
             MessageBox.Show($"Total calories: {totalCalories}");
         }
+        //method to calculate total calories
         public void TotalCalories(CalorieDisplayDelegate displayCalories)
         {
             double totalCalories = calorieCount.Sum();
