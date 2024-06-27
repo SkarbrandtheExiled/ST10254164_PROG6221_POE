@@ -3,7 +3,7 @@
 How to run:
 -------------------------------------------------
 To ensure smooth operating of the following application you will need the following:
-1.Visual Studio 2022 installed with .NET 4.8 or newer. Available at: https://visualstudio.microsoft.com/vs/community/ 
+1.Visual Studio 2022 installed with .NET 4.8 or newer. Available at: https://visualstudio.microsoft.com/vs/community/
 2.	A clone of the repository provided later in this document.
 3.	Or the source code which can be acquired by extracting the zip folder.
 4.  Open the solution file "POE.sln" in Visual Studio
