@@ -1,43 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ST10254164_PROG6221_POE.Classes
 {
-/// <summary>
-/// Name: Luke Michael Carolus
-/// StudentID: ST10254164
-/// Module: PROG6221
-/// </summary>
-/// 
+    /// <summary>
+    /// Name: Luke Michael Carolus
+    /// StudentID: ST10254164
+    /// Module: PROG6221
+    /// </summary>
+    /// 
+//********************************************START OF FILE**********************************//
+
     public partial class viewAllRecipes : Window
     {
         private ingredientClass ingredients;
+
         private ICollectionView recipeCollectionView;
+
 
         public string SelectedRecipe { get; private set; }
 
-        public viewAllRecipes(List<string> recipeNames)
+        public viewAllRecipes(ingredientClass ingredients)
         {
             InitializeComponent();
-            ingredients = new ingredientClass();
+
+            // Initialize ingredients and prepare the initial state
+            this.ingredients = ingredients;
+
+            // Update the ListBox with all recipes initially
+            UpdateRecipeListBox(ingredients.recipeNames);
+
+            // Display all recipes in the ListBox
             DisplayAllRecipes();
+
+            // Initialize the recipe list view and sorting
             InitializeRecipeList();
         }
 
         public void InitializeRecipeList()
         {
+            //clears the listBox to prevent duplications or maintaining old data
+            RecipeListBox.Items.Clear();
             // Wrap the recipeNames list in a CollectionView
             recipeCollectionView = CollectionViewSource.GetDefaultView(ingredients.recipeNames);
             // Set the CollectionView as the ItemsSource of the ListBox
@@ -96,7 +102,7 @@ namespace ST10254164_PROG6221_POE.Classes
         public void UpdateRecipeListBox(List<string> filteredRecipes)
         {
             RecipeListBox.Items.Clear();
-            foreach (var recipe in filteredRecipes)
+            foreach (string recipe in filteredRecipes)
             {
                 RecipeListBox.Items.Add(recipe);
             }
@@ -112,7 +118,7 @@ namespace ST10254164_PROG6221_POE.Classes
             }
             else
             {
-                MessageBox.Show("Please select a recipe.", "Selection Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Please select a recipe", "Selection Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
     }

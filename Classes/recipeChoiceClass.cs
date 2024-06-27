@@ -25,7 +25,7 @@ namespace ST10254164_PROG6221_POE.Classes
                 return;
             }
 
-            viewAllRecipes recipeListWindow = new viewAllRecipes(recipeData.recipeNames);
+            viewAllRecipes recipeListWindow = new viewAllRecipes(recipeData);
             if (recipeListWindow.ShowDialog() == true)
             {
                 string selectedRecipeName = recipeListWindow.SelectedRecipe;

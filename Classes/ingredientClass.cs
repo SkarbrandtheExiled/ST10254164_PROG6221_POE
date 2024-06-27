@@ -15,14 +15,14 @@ namespace ST10254164_PROG6221_POE.Classes
     /// Module: PROG6221
     /// References:
     /// Microsoft Learn, 2023. How to: Filter Data in a View. [Online] Available at: https://learn.microsoft.com/en-us/dotnet/desktop/wpf/data/how-to-filter-data-in-a-view?view=netframeworkdesktop-4.8 [Accessed 26 June 2024].
+    /// STACK OVERFLOW, 2011. How to Add a Scrollbar to Window in C#. [Online] Available at: https://stackoverflow.com/questions/6068860/how-to-add-a-scrollbar-to-window-in-c-sharp [Accessed 25 June 2024].
     /// 
 /// </summary>
-/// 
 
 //********************************************START OF FILE**********************************//
     public delegate void CalorieDisplayDelegate(double totalCalories, double calorieLimit);
 
-    internal class ingredientClass
+    public class ingredientClass
     {
         //-------creation and declaration of fields that will be used to store user data-------//
         public string[] ingredientNames;
@@ -214,8 +214,11 @@ namespace ST10254164_PROG6221_POE.Classes
             {
                 allRecipes.AppendLine($"{i + 1}. {sortedRecipeNames[i]}");
             }
-
             MessageBox.Show(allRecipes.ToString(), "All Recipes", MessageBoxButton.OK, MessageBoxImage.Information);
+            foreach (var recipeName in recipeNames)
+            {
+                DisplayRecipe(recipeName);
+            }
         }
 
             public void DisplayCalories(double totalCalories, double calorieLimit)
